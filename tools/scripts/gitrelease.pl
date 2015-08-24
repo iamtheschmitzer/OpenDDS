@@ -92,20 +92,19 @@ sub message_git_remote {
 }
 ############################################################################
 sub verify_git_status_clean {
-  my ($settings, $strict) = @_;
+  my ($settings) = @_;
   my $version = $settings->{version};
   my $clean = 1;
   my $status = open(GITSTATUS, 'git status -s|');
   my $modified = $settings->{modified};
 
-  # TODO remove
-  $modified->{"bin/gitrelease.pl"} = 1;
+  $modified->{"tools/scripts/gitrelease.pl"} = 1;
 
   my $unclean = "";
   while (<GITSTATUS>) {
     if (/^...(.*)/) {
       # If this is not a known modified file, or if we are in strict mode
-      if ($strict || !$modified->{$1}) {
+      if (!$modified->{$1}) {
         $unclean .= $_;
         $clean = 0;
       }
@@ -830,21 +829,18 @@ my @release_steps = (
   },
   {
     title   => 'Update VERSION',
-    skip    => 1,
     verify  => sub{verify_update_version_file(@_)},
     message => sub{message_update_version_file(@_)},
     remedy  => sub{remedy_update_version_file(@_)}
   },
   {
     title   => 'Update Version.h',
-    skip    => 1,
     verify  => sub{verify_update_version_h_file(@_)},
     message => sub{message_update_version_h_file(@_)},
     remedy  => sub{remedy_update_version_h_file(@_)}
   },
   {
     title   => 'Update PROBLEM-REPORT-FORM',
-    skip    => 1,
     verify  => sub{verify_update_prf_file(@_)},
     message => sub{message_update_prf_file(@_)},
     remedy  => sub{remedy_update_prf_file(@_)}
@@ -863,26 +859,22 @@ my @release_steps = (
   },
   {
     title   => 'Add NEWS Section',
-    skip    => 1,
     verify  => sub{verify_news_file_section(@_)},
     message => sub{message_news_file_section(@_)},
     remedy  => sub{remedy_news_file_section(@_)}
   },
   {
     title   => 'Update NEWS Section',
-    skip    => 1,
     verify  => sub{verify_update_news_file(@_)},
     message => sub{message_update_news_file(@_)}
   },
   {
     title   => 'Commit changes to GIT',
-    skip    => 1,
-    verify  => sub{verify_git_status_clean(@_, 1)},
+    verify  => sub{verify_git_status_clean(@_)},
     message => sub{message_commit_git_changes(@_)}
   },
   {
     title   => 'Create git tag',
-    skip    => 1,
     verify  => sub{verify_git_tag(@_)},
     message => sub{message_git_tag(@_)},
     remedy  => sub{remedy_git_tag(@_)}
@@ -944,7 +936,8 @@ my @release_steps = (
     verify  => sub{verify_update_opendds_org_front(@_)},
     message => sub{message_update_opendds_org_front(@_)}
   },
-  { title   => 'Update opendds.org news page',
+  {
+    title   => 'Update opendds.org news page',
     verify  => sub{verify_update_opendds_org_news(@_)},
     message => sub{message_update_opendds_org_news(@_)}
   },
@@ -1031,6 +1024,7 @@ sub run_step {
     print "  " . $step->{message}(\%settings) . "\n";
 
     my $remedied = 0;
+    my $skipped  = 0;
     # If a remedy is available
     if ($step->{remedy}) {
       # If --remedy is set
@@ -1045,15 +1039,19 @@ sub run_step {
           $remedied = 1;
         }
       # Else --remedy is  NOT set
+      } elsif ($settings{force} && $step->{skip}) {
+        $skipped = 1;
       } else {
         print "  Use --remedy to attempt a fix\n" if $step->{remedy};
       }
 
     # Else there is no remedy
+    } elsif ($settings{force} && $step->{skip}) {
+      $skipped = 1;
     } else {
       print "  Use --force to continue" if $step->{skip};
     }
-    die unless $remedied;
+    die unless ($remedied || $skipped);
     print "$divider\n";
   }
 }
