@@ -92,19 +92,17 @@ sub message_git_remote {
 }
 ############################################################################
 sub verify_git_status_clean {
-  my ($settings) = @_;
+  my ($settings, $strict) = @_;
   my $version = $settings->{version};
   my $clean = 1;
   my $status = open(GITSTATUS, 'git status -s|');
   my $modified = $settings->{modified};
 
-  $modified->{"tools/scripts/gitrelease.pl"} = 1;
-
   my $unclean = "";
   while (<GITSTATUS>) {
     if (/^...(.*)/) {
       # If this is not a known modified file, or if we are in strict mode
-      if (!$modified->{$1}) {
+      if ($strict || !$modified->{$1}) {
         $unclean .= $_;
         $clean = 0;
       }
@@ -824,7 +822,7 @@ my @release_steps = (
   {
     title   => 'Verify git status is clean',
     skip    => 1,
-    verify  => sub{verify_git_status_clean(@_)},
+    verify  => sub{verify_git_status_clean(@_, 0)},
     message => sub{message_git_status_clean(@_)}
   },
   {
@@ -870,7 +868,7 @@ my @release_steps = (
   },
   {
     title   => 'Commit changes to GIT',
-    verify  => sub{verify_git_status_clean(@_)},
+    verify  => sub{verify_git_status_clean(@_, 1)},
     message => sub{message_commit_git_changes(@_)}
   },
   {
@@ -1005,7 +1003,8 @@ my %settings = (
                 "PROBLEM-REPORT-FORM" => 1,
                 "VERSION" => 1,
                 "dds/Version.h" => 1,
-                "docs/history/ChangeLog-$version" => 1}
+                "docs/history/ChangeLog-$version" => 1,
+                "tools/scripts/gitrelease.pl" => 1}
 );
 
 my $half_divider = "-----------------------------------------";
