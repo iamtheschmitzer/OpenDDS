@@ -851,6 +851,7 @@ my @release_steps = (
   },
   {
     title   => 'Verify remote arg',
+    skip    => 1,
     verify  => sub{verify_git_remote(@_)},
     message => sub{message_git_remote(@_)},
   },
