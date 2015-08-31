@@ -1,0 +1,237 @@
+Mon Aug 31 09:05:05 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/DataDurabilityCache.cpp
+        * tests/DCPS/StringKey/Writer.cpp
+
+          Fix warnings
+
+Fri Aug 28 15:53:02 2015 -0500  iamtheschmitzer <jeffrey.j.schmitz@gmail.com>
+
+          Merge branch 'master' of
+          https://github.com/iamtheschmitzer/OpenDDS
+
+Fri Aug 28 15:51:15 2015 -0500  iamtheschmitzer <jeffrey.j.schmitz@gmail.com>
+
+        * MPC/config/dcps.mpb
+        * MPC/config/dds_vc_warnings.mpb
+        * MPC/config/vc8_warnings.mpb
+        * dds/DCPS/ZeroCopySeq_T.cpp
+        * dds/DdsDcps.mpc
+
+          remove previous define of _SCL_SECURE_NO_WARNINGS
+
+Thu Aug 27 13:59:34 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/DdsDcps_pch.h
+        * dds/DCPS/ZeroCopySeq_T.cpp
+
+          move #define of _SCL_SECURE_NO_WARNINGS to DdsDCPS_pch.h
+
+Thu Aug 27 09:18:56 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/DataWriterImpl.cpp
+        * dds/DCPS/StaticDiscovery.cpp
+        * dds/DCPS/ZeroCopySeq_T.cpp
+
+          Fix Checked Iterators warning C4996 for zero copy sequence, other
+          warnings
+
+Wed Aug 26 15:37:39 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+          Merge branch 'master' of github.com:objectcomputing/OpenDDS
+
+Wed Aug 26 15:27:24 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * tools/scripts/gitrelease.pl
+
+          Fix fuzz, indentation
+
+Wed Aug 26 14:11:53 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * tools/monitor/MonitorTask.cpp
+
+          Another get_handle
+
+Wed Aug 26 11:09:03 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * tools/scripts/gitrelease.pl
+
+          Format Changelog properly
+
+Wed Aug 26 10:21:38 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+          Merge pull request #147 from iamtheschmitzer/master
+          
+          Warning fixes, updates for release
+
+Tue Aug 25 17:19:12 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/DataReaderImpl.cpp
+        * dds/DCPS/DataWriterImpl.cpp
+        * dds/DCPS/DomainParticipantImpl.cpp
+        * dds/DCPS/DomainParticipantImpl.h
+        * dds/DCPS/InstanceState.cpp
+        * dds/DCPS/RecorderImpl.cpp
+        * dds/DCPS/ReplayerImpl.cpp
+        * dds/DCPS/TopicImpl.cpp
+        * examples/DCPS/DistributedContent/AbstractionLayer.cpp
+        * tests/DCPS/BuiltInTopic/common.cpp
+        * tests/DCPS/BuiltInTopicTest/monitor.cpp
+        * tests/DCPS/RtpsDiscovery/RtpsDiscoveryTest.cpp
+
+          rename get_handle to id_to_handle
+
+Tue Aug 25 15:50:41 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/DataReaderImpl.cpp
+        * dds/DCPS/DataWriterImpl.cpp
+        * dds/DCPS/DomainParticipantImpl.h
+        * dds/DCPS/transport/rtps_udp/RtpsUdpInst.cpp
+
+          Fix warnings. Require optional arg to
+          DomainParticipantImpl::get_handle so it does not hide
+          ACE_Event_Handler's version.
+
+Tue Aug 25 15:49:15 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * dds/DCPS/RTPS/BaseMessageUtils.h
+
+          Fix warning
+
+Tue Aug 25 15:46:39 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * NEWS
+
+          NEWS updates
+
+Tue Aug 25 11:16:00 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * tools/scripts/gitrelease.pl
+
+          Move changelog prior to archiving
+
+Mon Aug 24 17:20:41 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * tools/scripts/gitrelease.pl
+
+          Incorporate changes from elsewhere
+
+Wed Aug 19 16:19:11 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+          Merge pull request #145 from
+          objectcomputing/static_discovery_no_bit
+          
+          Fix bug in how callbacks are tracked and invoked.
+
+Tue Aug 18 14:26:45 2015 -0500  Adam Mitz <mitza@ociweb.com>
+
+        * tests/FACE/Conformance/ConformanceTest.cfg
+
+          Updated FACE conformance test configuration for new build
+          directories.
+
+Tue Aug 18 12:11:04 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+        * NEWS
+
+          News for 3.7 release - so far
+
+Tue Aug 18 09:22:00 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * tests/DCPS/StaticDiscovery/DataReaderListenerImpl.cpp
+
+          Fix debug message, should be LM_DEBUG
+
+Tue Aug 18 09:02:54 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * tests/DCPS/StaticDiscovery/DataReaderListenerImpl.cpp
+
+          Make BIT logging less verbose unless warranted by debug level
+
+Mon Aug 17 15:02:57 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * dds/DCPS/transport/rtps_udp/RtpsUdpDataLink.cpp
+        * dds/DCPS/transport/rtps_udp/RtpsUdpDataLink.h
+
+          Fix bug in how callbacks are tracked and invoked.
+
+Fri Aug 14 16:43:47 2015 -0500  Adam Mitz <mitza@ociweb.com>
+
+          Merge pull request #144 from iamtheschmitzer/master
+          
+          Use ACE_OS version of memcmp
+
+Fri Aug 14 11:45:06 2015 -0500  Jeff Schmitz <jeffrey.j.schmitz@gmail.com>
+
+          Merge pull request #143 from iamtheschmitzer/master
+          
+          Ignore RTPX messages in SPDP, make RTI Serialization test work
+          for minimum profile
+
+Fri Aug 14 11:40:44 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+          Merge pull request #142 from
+          objectcomputing/ts_api_updates_redmine_2334
+          
+          Condense different diagnostic functions into one scheme
+
+Fri Aug 14 10:05:31 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * dds/DCPS/transport/framework/TransportInst.cpp
+
+          Fix issues with formatNameForDump
+
+Fri Aug 14 08:46:48 2015 -0500  Adam Mitz <mitza@ociweb.com>
+
+        * examples/DCPS/ishapes/main.cpp
+
+          Added wchar compatibility to the shapes demo.
+
+Thu Aug 13 17:21:07 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * dds/DCPS/transport/framework/TransportInst.cpp
+        * dds/DCPS/transport/tcp/TcpConnection.cpp
+
+          Fix some logging.  Fix sizing for formateNameForDump method
+
+Thu Aug 13 15:32:00 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * dds/DCPS/StaticDiscovery.cpp
+        * tests/DCPS/ConfigTransports/DDSTEST.cpp
+        * tests/DCPS/Instances/Publisher.cpp
+        * tests/DCPS/Instances/Subscriber.cpp
+        * tests/DCPS/ManualAssertLiveliness/publisher.cpp
+        * tests/DCPS/ManualAssertLiveliness/subscriber.cpp
+        * tests/DCPS/StaticDiscovery/DataReaderListenerImpl.cpp
+        * tests/DCPS/StaticDiscovery/DataReaderListenerImpl.h
+        * tests/Utils/Options.cpp
+
+          Fix logging for w_char builds
+
+Thu Aug 13 14:51:46 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * tests/DCPS/ManualAssertLiveliness/DataReaderListener.cpp
+        * tests/DCPS/ManualAssertLiveliness/Writer.cpp
+
+          fix logging for wchar builds
+
+Thu Aug 13 13:01:41 2015 -0500  Peter Oschwald <oschwaldp@ociweb.com>
+
+        * dds/DCPS/transport/framework/TransportImpl.cpp
+        * dds/DCPS/transport/framework/TransportImpl.h
+        * dds/DCPS/transport/framework/TransportInst.cpp
+        * dds/DCPS/transport/framework/TransportInst.h
+        * dds/DCPS/transport/multicast/MulticastInst.cpp
+        * dds/DCPS/transport/multicast/MulticastInst.h
+        * dds/DCPS/transport/rtps_udp/RtpsUdpInst.cpp
+        * dds/DCPS/transport/rtps_udp/RtpsUdpInst.h
+        * dds/DCPS/transport/shmem/ShmemInst.cpp
+        * dds/DCPS/transport/shmem/ShmemInst.h
+        * dds/DCPS/transport/tcp/TcpConnection.cpp
+        * dds/DCPS/transport/tcp/TcpInst.cpp
+        * dds/DCPS/transport/tcp/TcpInst.h
+        * dds/DCPS/transport/udp/UdpInst.cpp
+        * dds/DCPS/transport/udp/UdpInst.h
+
+          Condense different diagnostic functions into one scheme
+
