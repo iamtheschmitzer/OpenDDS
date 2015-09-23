@@ -46,6 +46,7 @@ DataWriterRemoteImpl::add_association(const RepoId& yourId,
                                       const ReaderAssociation& reader,
                                       bool active)
 {
+ACE_DEBUG((LM_INFO, "(%P|%t) JJS DataWriterRemoteImpl::add_association \n"));
   if (DCPS_debug_level) {
     GuidConverter writer_converter(yourId);
     GuidConverter reader_converter(reader.readerId);

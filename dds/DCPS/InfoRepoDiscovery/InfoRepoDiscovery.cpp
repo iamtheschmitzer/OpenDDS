@@ -727,6 +727,7 @@ InfoRepoDiscovery::association_complete(DDS::DomainId_t domainId,
 void
 InfoRepoDiscovery::removeDataReaderRemote(const RepoId& subscriptionId)
 {
+ACE_DEBUG((LM_INFO, "(%P|%t) JJS removeDataReaderRemote \n"));
   DataReaderMap::iterator drr = dataReaderMap_.find(subscriptionId);
   if (drr == dataReaderMap_.end()) {
     ACE_ERROR((LM_ERROR,
@@ -741,11 +742,11 @@ InfoRepoDiscovery::removeDataReaderRemote(const RepoId& subscriptionId)
   deactivate_remote_object(drr->second.in(), orb_);
 
   dataReaderMap_.erase(drr);
-}
-
+} 
 void
 InfoRepoDiscovery::removeDataWriterRemote(const RepoId& publicationId)
 {
+ACE_DEBUG((LM_INFO, "(%P|%t) JJS removeDataWriterRemote \n"));
   DataWriterMap::iterator dwr = dataWriterMap_.find(publicationId);
   if (dwr == dataWriterMap_.end()) {
     ACE_ERROR((LM_ERROR,

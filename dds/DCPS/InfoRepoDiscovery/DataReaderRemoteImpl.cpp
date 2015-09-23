@@ -45,6 +45,7 @@ DataReaderRemoteImpl::add_association(const RepoId& yourId,
                                       const WriterAssociation& writer,
                                       bool active)
 {
+ACE_DEBUG((LM_INFO, "(%P|%t) JJS DataReaderRemoteImpl::add_association \n"));
   DataReaderCallbacks* parent = 0;
   DDS::DataReader_var drv;
   {
